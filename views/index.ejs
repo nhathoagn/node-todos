@@ -1,8 +1,76 @@
-<html>
-    <head>
-        <title>Node/Angular Todos</title>
-    </head>
-    <body>
-        <h1>Node todos !!!</h1>
-    </body>
+<html ng-app="app.todos">
+
+<head>
+    <title>Node/Angular Todos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.10.2/css/xeditable.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="assets/js/main/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.10.2/js/xeditable.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="assets/js/main/services/svTodos.js"></script>
+</head>
+
+<body ng-controller="todoController">
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1>{{ appName }}<span class="badge badge-primary">{{todos.length}}</span></h1>
+
+        </div>
+
+        <div id="todo-list" class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="checkbox" ng-repeat="todo in todos">
+                    <input type="checkbox" ng-model="todo.isDone" ng-change="updateTodo(todo"> 
+                    <a  href=""><i class="far fa-trash-alt" ng-click="deleteTodo(todo)"></i></a>
+                    <a href=""><i  ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible" class="fa fa-edit"></i></a>
+
+
+                    <span ng-class="{strike: todo.isDone}" editable-text="todo.text" e-form="textBtnForm" onbeforesave="updateTodo(todo)">{{todo.text}}</span>
+
+                </div>
+                <p class="text-center" ng-show="loading">
+                    <span class="fa fa-spinner fa-spin fa-3x"></span>
+
+                </p>
+            </div>
+        </div>
+        <div id="todo-form" class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <form id="input">
+                    <div class="form-group">
+                        <input id="form"  ng-model="formData.text" type="text" style="margin-left: 131px;" class="form-control input-lg text-center"
+                            placeholder="May muon gi ???">
+                    </div>
+                    <button type="submit" ng-disabled="!formData.text" ng-click="createTodo()" style="margin-left: 235px;" class="btn btn-primary btn-lg">Add</button>
+                </form>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</body>
+
 </html>
